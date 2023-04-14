@@ -9,8 +9,13 @@ const addMovie = async (movie) => {
   return newMovie;
 };
 
-
+const updateMovie = async (id, movie) => {
+  const { data: updatedMovie } = await subscriptionWS.updateMovie(id, movie);
+  return updatedMovie;
+};
 
 module.exports = {
-  getAllMoviesWithMembers, addMovie
+  getAllMoviesWithMembers,
+  addMovie,
+  updateMovie,
 };

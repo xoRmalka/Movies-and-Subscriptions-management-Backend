@@ -46,6 +46,17 @@ const addMovie = async (obj) => {
   return savedMovie.toObject();
 };
 
+const updateMovie = async (id, obj) => {
+  const movie = await movieModel.findById(id);
+
+  if (!movie) {
+    return new Error(`Movie with id ${id} not found`);
+  }
+
+  await movie.updateOne(obj);
+  return "Movie updated successfully.";
+};
+
 // Get all students
 const getAllSubscriptions = async () => {
   const subscriptions = await subscriptionModel.find({});
@@ -87,7 +98,8 @@ module.exports = {
   updateSubscription,
   deleteSubscription,
   getAllMoviesWithMembers,
-  addMovie
+  addMovie,
+  updateMovie,
 };
 
 // for each movie if movie id exist in the subscription push member id to array,

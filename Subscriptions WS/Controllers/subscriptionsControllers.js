@@ -4,7 +4,7 @@ const router = express.Router();
 
 const bl = require("../BLL/subscriptionsBLL");
 
-// Get all
+// Get all movies with members
 router.get("/", async (req, res) => {
   try {
     const moviesWithMembers = await bl.getAllMoviesWithMembers();
@@ -20,6 +20,21 @@ router.post("/movies", async (req, res) => {
     const newMovie = req.body;
     const movie = await bl.addMovie(newMovie);
     res.json(movie);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
+// Update movie
+router.put("/movies/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedMovie = req.body;
+    const status = await bl.updateMovie(id, updatedMovie);
+
+    if (status === null) res.status(404).send({ msg: "Movie not found" });
+
+    res.json(status);
   } catch (e) {
     res.status(500).json(e);
   }
