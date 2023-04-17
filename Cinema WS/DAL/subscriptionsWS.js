@@ -16,4 +16,13 @@ const updateMovie = async (id, movie) => {
   );
 };
 
-module.exports = { getAllMoviesWithMembers, addMovie, updateMovie };
+const deleteMovie = async (id) => {
+  return utils.deleteItem("http://localhost:8001/subscriptions/movies", id);
+};
+
+module.exports = {
+  getAllMoviesWithMembers,
+  addMovie,
+  updateMovie,
+  deleteMovie,
+};

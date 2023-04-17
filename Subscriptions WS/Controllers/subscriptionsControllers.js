@@ -40,6 +40,24 @@ router.put("/movies/:id", async (req, res) => {
   }
 });
 
+// Delete movie
+router.delete("/movies/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const status = await bl.deleteMovie(id);
+
+    if (status === null) res.status(404).send({ msg: "Movie not found" });
+
+    res.json(status);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
+//
+//
+//
+//
 // Get by id
 router.get("/:id", async (req, res) => {
   try {

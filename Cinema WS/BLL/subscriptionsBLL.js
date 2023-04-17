@@ -14,8 +14,14 @@ const updateMovie = async (id, movie) => {
   return updatedMovie;
 };
 
+const deleteMovie = async (id) => {
+  const { data: status } = await subscriptionWS.deleteMovie(id);
+  return status;
+};
+
 module.exports = {
   getAllMoviesWithMembers,
   addMovie,
   updateMovie,
+  deleteMovie,
 };

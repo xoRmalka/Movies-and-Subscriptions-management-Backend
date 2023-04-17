@@ -57,6 +57,17 @@ const updateMovie = async (id, obj) => {
   return "Movie updated successfully.";
 };
 
+const deleteMovie = async (id) => {
+  const movie = await movieModel.findById(id);
+
+  if (!movie) {
+    return new Error(`Movie with id ${id} not found`);
+  }
+
+  await movie.deleteOne();
+  return "Movie deleted successfully.";
+};
+
 // Get all students
 const getAllSubscriptions = async () => {
   const subscriptions = await subscriptionModel.find({});
@@ -100,6 +111,7 @@ module.exports = {
   getAllMoviesWithMembers,
   addMovie,
   updateMovie,
+  deleteMovie,
 };
 
 // for each movie if movie id exist in the subscription push member id to array,

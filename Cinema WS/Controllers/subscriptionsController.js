@@ -34,4 +34,15 @@ router.put("/movies/:id", async (req, res) => {
   }
 });
 
+// Delete a movie by id
+router.delete("/movies/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await bl.deleteMovie(id);
+    res.json(result);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 module.exports = router;
