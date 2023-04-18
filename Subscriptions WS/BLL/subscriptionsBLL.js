@@ -64,8 +64,16 @@ const deleteMovie = async (id) => {
     return new Error(`Movie with id ${id} not found`);
   }
 
-  await movie.deleteOne();
-  return "Movie deleted successfully.";
+  // delete the movie from all subscriptions that have it in their movies array
+  await subscriptionModel.updateMany(
+    { movies: { $in: [id] } },
+    { $pull: { movies: id } }
+  );
+
+  // delete the movie from the movieModel
+  await movieModel.findByIdAndDelete(id);
+
+  return "Movie deleted successfully from both movieModel and subscriptionModel.";
 };
 
 // Get all students
