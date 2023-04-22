@@ -19,9 +19,15 @@ const deleteMovie = async (id) => {
   return status;
 };
 
+const getAllMembersWithMovies = async () => {
+  const { data: membersData } = await subscriptionWS.getAllMembersWithMovies();
+  return membersData;
+};
+
 module.exports = {
   getAllMoviesWithMembers,
   addMovie,
   updateMovie,
   deleteMovie,
+  getAllMembersWithMovies,
 };

@@ -7,7 +7,8 @@ require("./Config/database");
 const app = express();
 const cors = require("cors");
 
-const subscriptionsControllers = require("./Controllers/subscriptionsControllers");
+const subscriptionsMoviesController = require("./Controllers/subscriptionsMoviesController");
+const subscriptionsMembersController = require("./Controllers/subscriptionsMembersController");
 
 app.use(express.json());
 app.use(cors());
@@ -15,7 +16,8 @@ app.use(cors());
 // moviesBLL.getAllMoviesAndSave();
 // membersBLL.getAllMembersAndSave();
 
-app.use("/subscriptions", subscriptionsControllers);
+app.use("/movies", subscriptionsMoviesController);
+app.use("/members", subscriptionsMembersController);
 
 app.listen(8001, () => {
   console.log("Server running on port 8001");

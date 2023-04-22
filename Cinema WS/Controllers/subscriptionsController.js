@@ -3,7 +3,7 @@ const router = express.Router();
 
 const bl = require("../BLL/subscriptionsBLL");
 
-router.get("/", async (req, res) => {
+router.get("/movies", async (req, res) => {
   try {
     const moviesData = await bl.getAllMoviesWithMembers();
     res.json(moviesData);
@@ -40,6 +40,15 @@ router.delete("/movies/:id", async (req, res) => {
     const { id } = req.params;
     const result = await bl.deleteMovie(id);
     res.json(result);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
+router.get("/members", async (req, res) => {
+  try {
+    const membersData = await bl.getAllMembersWithMovies();
+    res.json(membersData);
   } catch (e) {
     res.status(500).json(e);
   }

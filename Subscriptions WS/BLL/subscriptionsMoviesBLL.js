@@ -76,46 +76,7 @@ const deleteMovie = async (id) => {
   return "Movie deleted successfully from both movieModel and subscriptionModel.";
 };
 
-// Get all students
-const getAllSubscriptions = async () => {
-  const subscriptions = await subscriptionModel.find({});
-  return subscriptions;
-};
-
-// Get student by id
-const getSubscriptionById = async (id) => {
-  const subscription = await subscriptionModel.find({ id: id });
-  if (subscription) return student;
-
-  return null;
-};
-
-//Create a new student
-
-const addSubscription = async (obj) => {
-  const subscription = new subscriptionModel(obj);
-  await subscription.save();
-  return "Created";
-};
-
-//Update existing student
-//אם לא קיים ואני עושה פוט הוא יוצר חדש?
-const updateSubscription = async (id, obj) => {
-  await subscriptionModel.find({ id: id }).updateOne(obj);
-  return "Updated";
-};
-
-const deleteSubscription = async (id) => {
-  await subscriptionModel.find({ id: id }).deleteOne();
-  return "Deleted";
-};
-
 module.exports = {
-  getAllSubscriptions,
-  getSubscriptionById,
-  addSubscription,
-  updateSubscription,
-  deleteSubscription,
   getAllMoviesWithMembers,
   addMovie,
   updateMovie,
