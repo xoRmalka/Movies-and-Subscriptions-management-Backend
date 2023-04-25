@@ -54,4 +54,16 @@ router.get("/members", async (req, res) => {
   }
 });
 
+// Update subscriptionn
+router.put("/subscription/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = req.body;
+    const updatedSubscription = await bl.updateSubscriptionForMember(id, obj);
+    res.json(updatedSubscription);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 module.exports = router;

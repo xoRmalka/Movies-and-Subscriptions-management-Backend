@@ -13,13 +13,21 @@ const getAllMoviesWithMembers = async () => {
 
     const membersWhoWatched = [];
 
-    const memberPromises = subscriptions.map(async (member) => {
-      if (member.movies?.includes(movieId)) {
-        const memberWhoWatched = await memberModel.findOne({
-          _id: member.memberId,
-        });
+    const memberPromises = subscriptions.map(async (subscription) => {
+      const member = await memberModel.findOne({ _id: subscription.memberId });
 
-        membersWhoWatched.push(memberWhoWatched);
+      if (member) {
+        const movieWatched = subscription.movies.find(
+          (movie) => movie.id === movieId
+        );
+
+        if (movieWatched) {
+          membersWhoWatched.push({
+            memberId: member._id,
+            name: member.name,
+            date: movieWatched.date,
+          });
+        }
       }
     });
 

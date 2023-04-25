@@ -24,10 +24,17 @@ const getAllMembersWithMovies = async () => {
   return membersData;
 };
 
+const updateSubscriptionForMember = async (id, obj) => {
+  const { data: subscription } =
+    await subscriptionWS.updateSubscriptionForMember(id, obj);
+  return subscription;
+};
+
 module.exports = {
   getAllMoviesWithMembers,
   addMovie,
   updateMovie,
   deleteMovie,
   getAllMembersWithMovies,
+  updateSubscriptionForMember,
 };

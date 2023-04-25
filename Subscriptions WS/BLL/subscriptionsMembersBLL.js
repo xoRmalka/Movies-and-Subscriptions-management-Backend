@@ -8,15 +8,20 @@ const getAllMembersWithMovies = async () => {
 
   const memberPromises = members.map(async (member) => {
     const memberId = member._id.toString();
-
     const moviesWatched = [];
 
     for (const subscription of subscriptions) {
       if (subscription.memberId === memberId) {
-        for (const movieId of subscription.movies) {
-          const movie = await movieModel.findById(movieId);
-          if (movie) {
-            moviesWatched.push({ id: movie._id, name: movie.name });
+        for (const movie of subscription.movies) {
+          const { id, date } = movie;
+          const movieData = await movieModel.findById(id);
+
+          if (movieData) {
+            moviesWatched.push({
+              id: movieData._id,
+              name: movieData.name,
+              date: date,
+            });
           }
         }
       }
@@ -37,21 +42,41 @@ const getAllMembersWithMovies = async () => {
   return membersWithMovies;
 };
 
+const updateSubscriptionForMember = async (id, obj) => {
+  // Find the subscription document that matches the memberId
+  const subscription = await subscriptionModel.findOne({ memberId: id });
+
+  if (!subscription) {
+    const member = await memberModel.findById(id);
+
+    if (member) {
+      const firstSubscription = {
+        memberId: id,
+        movies: [obj],
+      };
+
+      const subscription = new subscriptionModel(firstSubscription);
+      const savedSubscription = await subscription.save();
+
+      return `Movie ${obj.id} added to subscription for member ${id}`;
+    } else {
+      return `Member with ID ${id} not found`;
+    }
+  } else {
+    // Update the subscription document to add the new movie to the movies array
+    await subscriptionModel.updateOne(
+      { memberId: id },
+      { $push: { movies: obj } }
+    );
+
+    return `Movie ${obj.id} added to subscription for member ${id}`;
+  }
+};
+
 const addMovie = async (obj) => {
   const movie = new movieModel(obj);
   const savedMovie = await movie.save();
   return savedMovie.toObject();
-};
-
-const updateMovie = async (id, obj) => {
-  const movie = await movieModel.findById(id);
-
-  if (!movie) {
-    return new Error(`Movie with id ${id} not found`);
-  }
-
-  await movie.updateOne(obj);
-  return "Movie updated successfully.";
 };
 
 const deleteMovie = async (id) => {
@@ -75,8 +100,8 @@ const deleteMovie = async (id) => {
 
 module.exports = {
   getAllMembersWithMovies,
+  updateSubscriptionForMember,
   addMovie,
-  updateMovie,
   deleteMovie,
 };
 

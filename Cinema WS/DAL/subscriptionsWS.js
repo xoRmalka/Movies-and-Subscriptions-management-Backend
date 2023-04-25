@@ -22,10 +22,19 @@ const getAllMembersWithMovies = async () => {
   return utils.getAllItems("http://localhost:8001/members/");
 };
 
+const updateSubscriptionForMember = async (id, obj) => {
+  return utils.updateItem(
+    "http://localhost:8001/members/subscription",
+    id,
+    obj
+  );
+};
+
 module.exports = {
   getAllMoviesWithMembers,
   addMovie,
   updateMovie,
   deleteMovie,
   getAllMembersWithMovies,
+  updateSubscriptionForMember,
 };
