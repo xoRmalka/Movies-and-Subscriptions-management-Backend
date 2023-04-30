@@ -74,15 +74,23 @@ const updateSubscriptionForMember = async (id, obj) => {
 };
 
 const deleteSubscriptionByMemberId = async (id) => {
+  const member = await memberModel.findById(id);
+
+  if (!member) {
+    return new Error(`Member with ID ${id} not found`);
+  }
+
+  await memberModel.deleteOne({ _id: id });
+
   const subscription = await subscriptionModel.findOne({ memberId: id });
 
   if (!subscription) {
-    return new Error(`Subscription with member ID ${id} not found`);
+    return `Member with ID ${id} deleted successfully.`;
   }
 
   await subscriptionModel.deleteOne({ memberId: id });
 
-  return `Subscription with member ID ${id} deleted successfully.`;
+  return `Member with ID ${id} and their subscription deleted successfully.`;
 };
 
 const addMovie = async (obj) => {
