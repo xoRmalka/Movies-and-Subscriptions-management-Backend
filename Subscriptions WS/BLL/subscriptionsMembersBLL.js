@@ -93,6 +93,17 @@ const deleteSubscriptionByMemberId = async (id) => {
   return `Member with ID ${id} and their subscription deleted successfully.`;
 };
 
+const updateMember = async (id, obj) => {
+  const member = await memberModel.findById(id);
+
+  if (!member) {
+    return new Error(`Member with ID ${id} not found`);
+  }
+
+  await member.updateOne(obj);
+  return "Member updated successfully.";
+};
+
 const addMovie = async (obj) => {
   const movie = new movieModel(obj);
   const savedMovie = await movie.save();
@@ -122,6 +133,7 @@ module.exports = {
   getAllMembersWithMovies,
   updateSubscriptionForMember,
   deleteSubscriptionByMemberId,
+  updateMember,
   addMovie,
   deleteMovie,
 };

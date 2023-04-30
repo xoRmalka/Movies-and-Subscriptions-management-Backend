@@ -46,6 +46,22 @@ router.delete("/subscription/:memberId", async (req, res) => {
   }
 });
 
+// Update member
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = req.body;
+    const result = await bl.updateMember(id, obj);
+    if (result instanceof Error) {
+      res.status(404).send({ msg: result.message });
+    } else {
+      res.json({ msg: result });
+    }
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 // Add movie
 router.post("/", async (req, res) => {
   try {

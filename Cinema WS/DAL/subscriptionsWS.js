@@ -34,6 +34,11 @@ const updateSubscriptionForMember = async (id, obj) => {
 const deleteSubscriptionByMemberId = async (id) => {
   return utils.deleteItem("http://localhost:8001/members/subscription", id);
 };
+
+const updateMember = async (id, obj) => {
+  return utils.updateItem("http://localhost:8001/members", id, obj);
+};
+
 module.exports = {
   getAllMoviesWithMembers,
   addMovie,
@@ -42,4 +47,5 @@ module.exports = {
   getAllMembersWithMovies,
   updateSubscriptionForMember,
   deleteSubscriptionByMemberId,
+  updateMember,
 };

@@ -6,9 +6,9 @@ const getAllMoviesWithMembers = async () => {
   const subscriptions = await subscriptionModel.find({});
   const movies = await movieModel.find({});
 
-  const firstTenMovies = movies.slice(0, 20);
+  // const firstTenMovies = movies.slice(0, 20);
 
-  const moviePromises = firstTenMovies.map(async (movie) => {
+  const moviePromises = movies.map(async (movie) => {
     const movieId = movie._id.toString();
 
     const membersWhoWatched = [];

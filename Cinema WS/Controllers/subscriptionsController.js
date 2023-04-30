@@ -77,4 +77,16 @@ router.delete("/subscription/:id", async (req, res) => {
   }
 });
 
+// Update member
+router.put("/members/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const obj = req.body;
+    const updatedMember = await bl.updateMember(id, obj);
+    res.json(updatedMember);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 module.exports = router;
