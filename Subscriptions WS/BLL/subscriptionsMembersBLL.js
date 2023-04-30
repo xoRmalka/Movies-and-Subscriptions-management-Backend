@@ -104,10 +104,10 @@ const updateMember = async (id, obj) => {
   return "Member updated successfully.";
 };
 
-const addMovie = async (obj) => {
-  const movie = new movieModel(obj);
-  const savedMovie = await movie.save();
-  return savedMovie.toObject();
+const addMember = async (obj) => {
+  const member = new memberModel(obj);
+  const savedMember = await member.save();
+  return savedMember.toObject();
 };
 
 const deleteMovie = async (id) => {
@@ -134,7 +134,7 @@ module.exports = {
   updateSubscriptionForMember,
   deleteSubscriptionByMemberId,
   updateMember,
-  addMovie,
+  addMember,
   deleteMovie,
 };
 

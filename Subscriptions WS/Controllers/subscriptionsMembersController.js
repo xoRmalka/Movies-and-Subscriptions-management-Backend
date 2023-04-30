@@ -62,12 +62,12 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Add movie
+// Add Member
 router.post("/", async (req, res) => {
   try {
-    const newMovie = req.body;
-    const movie = await bl.addMovie(newMovie);
-    res.json(movie);
+    const newMember = req.body;
+    const member = await bl.addMember(newMember);
+    res.json(member);
   } catch (e) {
     res.status(500).json(e);
   }

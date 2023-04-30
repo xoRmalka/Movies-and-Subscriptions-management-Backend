@@ -89,4 +89,15 @@ router.put("/members/:id", async (req, res) => {
   }
 });
 
+//Add Member
+router.post("/members", async (req, res) => {
+  try {
+    const member = req.body;
+    const newMember = await bl.addMember(member);
+    res.json(newMember);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 module.exports = router;
