@@ -66,4 +66,15 @@ router.put("/subscription/:id", async (req, res) => {
   }
 });
 
+// Delete subscription by member id
+router.delete("/subscription/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await bl.deleteSubscriptionByMemberId(id);
+    res.json(result);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 module.exports = router;

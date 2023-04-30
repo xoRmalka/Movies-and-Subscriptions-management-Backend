@@ -29,6 +29,23 @@ router.put("/subscription/:id", async (req, res) => {
   }
 });
 
+// Delete subscription by member ID
+router.delete("/subscription/:memberId", async (req, res) => {
+  try {
+    const { memberId } = req.params;
+    const subscription = await bl.deleteSubscriptionByMemberId(memberId);
+
+    if (!subscription) {
+      res.status(404).send({ msg: "Subscription not found" });
+      return;
+    }
+
+    res.json({ msg: "Subscription deleted successfully" });
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
+
 // Add movie
 router.post("/", async (req, res) => {
   try {

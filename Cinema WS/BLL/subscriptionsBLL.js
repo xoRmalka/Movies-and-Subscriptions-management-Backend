@@ -30,6 +30,12 @@ const updateSubscriptionForMember = async (id, obj) => {
   return subscription;
 };
 
+const deleteSubscriptionByMemberId = async (id) => {
+  const { data: subscription } =
+    await subscriptionWS.deleteSubscriptionByMemberId(id);
+  return subscription;
+};
+
 module.exports = {
   getAllMoviesWithMembers,
   addMovie,
@@ -37,4 +43,5 @@ module.exports = {
   deleteMovie,
   getAllMembersWithMovies,
   updateSubscriptionForMember,
+  deleteSubscriptionByMemberId,
 };

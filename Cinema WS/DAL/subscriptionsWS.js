@@ -1,5 +1,7 @@
 const utils = require("../Utils/Crud");
 
+//movies
+
 const getAllMoviesWithMembers = async () => {
   return utils.getAllItems("http://localhost:8001/movies/");
 };
@@ -29,7 +31,9 @@ const updateSubscriptionForMember = async (id, obj) => {
     obj
   );
 };
-
+const deleteSubscriptionByMemberId = async (id) => {
+  return utils.deleteItem("http://localhost:8001/members/subscription", id);
+};
 module.exports = {
   getAllMoviesWithMembers,
   addMovie,
@@ -37,4 +41,5 @@ module.exports = {
   deleteMovie,
   getAllMembersWithMovies,
   updateSubscriptionForMember,
+  deleteSubscriptionByMemberId,
 };
