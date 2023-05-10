@@ -13,6 +13,7 @@ const subscriptionsMembersController = require("./Controllers/subscriptionsMembe
 app.use(express.json());
 app.use(cors());
 
+//First data import
 // moviesBLL.getAllMoviesAndSave();
 // membersBLL.getAllMembersAndSave();
 

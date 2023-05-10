@@ -3,6 +3,7 @@ const router = express.Router();
 
 const bl = require("../BLL/subscriptionsBLL");
 
+//Get All Movies With Members
 router.get("/movies", async (req, res) => {
   try {
     const moviesData = await bl.getAllMoviesWithMembers();
@@ -12,6 +13,7 @@ router.get("/movies", async (req, res) => {
   }
 });
 
+//Add Movie
 router.post("/movies", async (req, res) => {
   try {
     const movie = req.body;
@@ -45,6 +47,7 @@ router.delete("/movies/:id", async (req, res) => {
   }
 });
 
+//Get All Members With Movies
 router.get("/members", async (req, res) => {
   try {
     const membersData = await bl.getAllMembersWithMovies();

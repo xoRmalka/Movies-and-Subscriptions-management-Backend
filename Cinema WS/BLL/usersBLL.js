@@ -20,7 +20,6 @@ const setNewUser = async (obj) => {
     id: userWithId._id,
     firstName: obj.firstName,
     lastName: obj.lastName,
-    // TODO: Add date field
   };
 
   await userFile.setUser(userForUsersJson);

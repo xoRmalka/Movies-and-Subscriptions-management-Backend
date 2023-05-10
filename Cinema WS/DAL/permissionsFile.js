@@ -6,23 +6,10 @@ const getUsers = () => {
   return jsonfile.readFile(file);
 };
 
-// const getUser = (id) => {
-//   jsonfile.readFile(file, function (err, obj) {
-//     if (err) console.error(err);
-//     const user = obj.users.find((u) => u.id === id);
-//     if (user) {
-//       console.log(user);
-//     } else {
-//       console.log(`User with id ${id} not found.`);
-//     }
-//   });
-// };
-
 const getUserById = async (id) => {
   const { permissions } = await jsonfile.readFile(file);
 
   const user = permissions?.find((user) => user.id === id);
-  // if (!user) return { permissions: "" };
 
   return user;
 };

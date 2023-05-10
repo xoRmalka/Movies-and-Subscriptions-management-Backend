@@ -4,7 +4,7 @@ const router = express.Router();
 
 const bl = require("../BLL/usersBLL");
 
-// Get all
+// Get All Users
 router.get("/", async (req, res) => {
   try {
     const users = await bl.getAllUsers();
@@ -14,16 +14,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get by username
+// Get By User Name
 router.get("/:username", async (req, res) => {
   try {
-    const { username } = req.params; // req.params = {id: 23432hu234234}
+    const { username } = req.params;
     const user = await bl.getByUserName(username);
     res.json(user);
-    // } catch (e) {
-    //   if (e.kind === "ObjectId") res.status(404).json({ msg: "Not Found", e: e });
-    //   res.status(500).json(e);
-    // }
   } catch (error) {
     console.log(error);
     if (error.message.startsWith("User")) {
@@ -44,10 +40,10 @@ router.post("/", async (req, res) => {
     res.status(500).json(e);
   }
 });
-// create User (להוסיף קידומת לבקשה)
+// Create User
 router.put("/:username", async (req, res) => {
   try {
-    const { username } = req.params; // req.params = {id: 23432hu234234}
+    const { username } = req.params;
     const user = req.body;
     const status = await bl.createUser(username, user);
 
@@ -59,10 +55,10 @@ router.put("/:username", async (req, res) => {
   }
 });
 
-//update user
+//Update User
 router.put("/update/:id", async (req, res) => {
   try {
-    const { id } = req.params; // req.params = {id: 23432hu234234}
+    const { id } = req.params;
     const user = req.body;
     const status = await bl.updateUser(id, user);
 
@@ -74,10 +70,10 @@ router.put("/update/:id", async (req, res) => {
   }
 });
 
-// // Delete student
+//Delete User
 router.delete("/:id", async (req, res) => {
   try {
-    const { id } = req.params; // req.params = {id: 23432hu234234}
+    const { id } = req.params;
     console.log(id);
     const status = await bl.deleteUser(id);
     res.json(status);

@@ -137,6 +137,3 @@ module.exports = {
   addMember,
   deleteMovie,
 };
-
-// for each movie if movie id exist in the subscription push member id to array,
-//then for each array get the name for the Members collection by ID

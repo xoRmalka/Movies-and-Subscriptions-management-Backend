@@ -10,10 +10,7 @@ const getUsers = () => {
 
 const getUserById = async (id) => {
   const { users } = await jsonfile.readFile(file);
-
   const user = users?.find((user) => user.id === id);
-  // if (!user) return { firstName: "", lastname: "" };
-
   return user;
 };
 
